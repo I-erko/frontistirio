@@ -283,6 +283,10 @@ div.contenido-header {
   padding-top: 40px;
 }
 
+div.informacion-evento a {
+  text-decoration: none;
+}
+
 @media only screen and (min-width : 768px) {
   div.contenido-header {
     padding-top: 10px;
@@ -339,7 +343,8 @@ p.ciudad {
 
 p.slogan {
   text-transform: none!important;
-  color: magenta;
+  color: white;
+  text-shadow: 0 0 10px black!important;
 }
 
 p.slogan span {
