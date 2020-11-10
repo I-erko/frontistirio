@@ -3,23 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Frontistirio | Lista de Eventos</title>
+  <title>Frontistirio |  Eventos</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../css/all.min.css">
+  <link rel="stylesheet" href="../css/all.min.css"> 
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="../css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="../css/responsive.bootstrap4.min.css">
-  <!-- Theme style -->
+  <!-- overlayScrollbars -->
   <link rel="stylesheet" href="../css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -55,7 +53,7 @@
     <!-- Brand Logo -->
     <a href="../../index.html" class="brand-link">
       <img src="../img/AdminLTELogo.png"
-           alt="AdminLTE Logo"
+           alt="Frontistirio Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light"><b>F</b>rontistirio</span>
@@ -106,13 +104,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="lista-evento.html" class="nav-link">
+                <a href="{{ url_for('listaEvento') }}" class="nav-link">
                   <i class="fa fa-list-ul nav-icon"></i>
                   <p>Ver Todos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="crear-evento.html" class="nav-link">
+                <a href="{{ url_for('crearEvento') }}" class="nav-link">
                   <i class="fa fa-plus-circle nav-icon"></i>
                   <p>Agregar</p>
                 </a>
@@ -129,13 +127,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="lista-categoria.html" class="nav-link">
+                <a href="{{ url_for('listaCategoria') }}" class="nav-link">
                   <i class="fa fa-list-ul nav-icon"></i>
                   <p>Ver Todos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="crear-categoria.html" class="nav-link">
+                <a href="{{ url_for('crearCategoria') }}" class="nav-link">
                   <i class="fa fa-plus-circle nav-icon"></i>
                   <p>Agregar</p>
                 </a>
@@ -152,13 +150,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="lista-invitado.html" class="nav-link">
+                <a href="{{ url_for('listaInvitado') }}" class="nav-link">
                   <i class="fa fa-list-ul nav-icon"></i>
                   <p>Ver Todos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="crear-invitado.html" class="nav-link">
+                <a href="{{ url_for('crearInvitado') }}" class="nav-link">
                   <i class="fa fa-plus-circle nav-icon"></i>
                   <p>Agregar</p>
                 </a>
@@ -198,13 +196,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="lista-admin.html" class="nav-link">
+                <a href="{{ url_for('listaAdmin') }}" class="nav-link">
                   <i class="fa fa-list-ul nav-icon"></i>
                   <p>Ver Todos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="crear-admin.html" class="nav-link">
+                <a href="{{ url_for('crearAdmin') }}" class="nav-link">
                   <i class="fa fa-plus-circle nav-icon"></i>
                   <p>Agregar</p>
                 </a>
@@ -248,12 +246,16 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Listado de Eventos</h1>
+            <h1>              
+              Crear Evento <br>
+              <small>Llena el formulario para crear un evento</small>
+            </h1>
+
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Listado de Eventos</li>
+              <li class="breadcrumb-item active">Crear Evento</li>
             </ol>
           </div>
         </div>
@@ -262,88 +264,71 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Gestiona tus eventos en esta sección</h3>
-              </div>
-              <!-- /.card-header -->
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Crear Evento</h3>
+        </div>
+        <div class="card-body">
+          <div class="col-md-8">
+            <form role="form" name="-admin" id="-admin" method="POST" action="">
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Fecha</th>
-                    <th>Hora</th>                    
-                    <th>Categoría</th>                    
-                    <th>Invitado</th>
-                    <th>Acciones</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>HTML, CSS3 y JavaScript</td>
-                      <td>10 de Dic.</td>
-                      <td>16:00 hrs</td>
-                      <td>Taller</td>
-                      <td>Yerko Riffo</td>
-                      <td>
-                        <a href="editar-evento.html" class="btn btn-lg bg-orange margin">
-                          <i class="far fa-edit"></i>
-                        </a>
-                        <a href="#" class="btn btn-lg bg-maroon margin">
-                          <i class="far fa-trash-alt"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Tecnologías del futuro</td>
-                      <td>10 de Dic.</td>
-                      <td>17:00 hrs</td>
-                      <td>Conferencia</td>
-                      <td>Bryan Pino</td>
-                      <td>
-                        <a href="editar-evento.html" class="btn btn-lg bg-orange margin">
-                          <i class="far fa-edit"></i>
-                        </a>
-                        <a href="#" class="btn btn-lg bg-maroon margin">
-                          <i class="far fa-trash-alt"></i>
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Fecha</th>
-                    <th>Hora</th>                    
-                    <th>Categoría</th>                    
-                    <th>Invitado</th>
-                    <th>Acciones</th>
-                  </tr>
-                  </tfoot>
-                </table>
+                <div class="form-group">
+                  <label for="titulo_evento">Título Evento:</label>
+                  <input type="text" class="form-control" id="titulo_evento" name="titulo_evento" placeholder="Título del evento">
+                </div>
+                <div class="form-group">
+                    <label for="categoria_evento">Categoría Evento:</label>
+                    <select name="categoria_evento" class="form-control select2" id="">
+                        <option value="">-- Selecciona una categoría --</option>
+                        <option value="">Taller</option>
+                        <option value="">Conferencia</option>
+                        <option value="">Seminario</option>
+                        
+                    </select>
+                  </div>
+                <div class="form-group">
+                    <label>Fecha Evento:</label>
+                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
+                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label for="hora_evento">Hora Evento:</label>
+                  <input type="text" class="form-control" id="hora_evento" name="hora_evento" placeholder="Hora del Evento">
+                </div>
+                <div class="form-group">
+                    <label for="expositor_evento">Expositor del evento:</label>
+                    <input type="text" class="form-control" id="expositor_evento" name="expositor_evento" placeholder="Nombre del expositor del Evento">
+                  </div>
               </div>
               <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
+  
+              <div class="card-footer">
+                <input type="hidden" name="agregar-admin" value="1">
+                <button type="submit" class="btn btn-primary">Agregar</button>
+              </div>
+            </form>
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
+        <!-- /.card-body -->
       </div>
-      <!-- /.container-fluid -->
+      <!-- /.card -->
+
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 1.0
     </div>
-    <strong>Copyright &copy; 2020 <a href="../../index.html">Fronstistirio.cl</a>.</strong> 
+    <strong>Copyright &copy; 2020 <a href="../../index.html">Frontistirio.cl</a>.</strong>
     Todos los Derechos Reservados.
   </footer>
 
@@ -359,33 +344,9 @@
 <script src="../js/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../js/bootstrap.bundle.min.js"></script>
-<!-- DataTables -->
-<script src="../js/jquery.dataTables.min.js"></script>
-<script src="../js/dataTables.bootstrap4.min.js"></script>
-<script src="../js/dataTables.responsive.min.js"></script>
-<script src="../js/responsive.bootstrap4.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../js/demo.js"></script>
-<!-- page script -->
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-      "language": {
-        paginate: {
-          next: 'Siguiente',
-          previous: 'Anterior'
-        },
-        info: 'Mostrando _START_ a _END_ de _TOTAL_ resultados',
-        emptyTable: 'No hay registros disponibles',
-        infoEmpty: '0 Registros',
-        search: 'Buscar:'
-      }
-    });
-  });
-</script>
 </body>
 </html>
