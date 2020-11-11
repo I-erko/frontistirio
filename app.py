@@ -12,13 +12,36 @@ app.config['MYSQL_DB'] = 'frontistirio'
 mysql = MySQL(app)
 
 
-#MAIN'S ROUTES
+#-------MAIN'S ROUTES----------
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-#ADMIN'S ROUTES
+@app.route('/registro')
+def registro():
+    return render_template('registro.html')
+
+@app.route('/invitados')
+def invitados():
+    return render_template('invitados.html')
+
+@app.route('/conferencia')
+def conferencia():
+    return render_template('conferencia.html')
+
+@app.route('/calendario')
+def calendario():
+    return render_template('calendario.html')
+
+
+
+#-----ADMIN'S ROUTES-------
+
+#Login
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 #Evento
 @app.route('/listaEvento')

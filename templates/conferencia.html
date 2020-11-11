@@ -14,13 +14,13 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin="" />
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
     <link
         href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Oswald:wght@200;300;400;500;600;700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="css/lightbox.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lightbox.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 
     <meta name="theme-color" content="#fafafa">
 </head>
@@ -54,7 +54,7 @@
 
                     </div>
 
-                    <a href="index.html"><h1 class="nombre-sitio">FRONTISTIRIO</h1></a>
+                    <a href="{{ url_for('index') }}"><h1 class="nombre-sitio">FRONTISTIRIO</h1></a>
                     <p class="slogan">Las mejores conferencias, talleres y seminarios de <br> <span>Desarrollo de Software y Tecnologías</span></p>
 
                 </div>
@@ -73,7 +73,7 @@
 
             <div class="logo">
 
-                <a href="index.html">
+                <a href="{{ url_for('index') }}">
 
                 </a>
 
@@ -89,10 +89,10 @@
 
             <nav class="navegacion-principal clearfix">
 
-                <a href="conferencia.html">Conferencia</a>
-                <a href="calendario.html">Calendario</a>
-                <a href="invitados.html">Invitados</a>
-                <a href="registro.html">Reservaciones</a>
+                <a href="{{ url_for('conferencia') }}">Conferencia</a>
+                <a href="{{ url_for('calendario') }}">Calendario</a>
+                <a href="{{ url_for('invitados') }}">Invitados</a>
+                <a href="{{ url_for('registro') }}">Reservaciones</a>
 
             </nav>
 
@@ -117,44 +117,44 @@
 
         <div class="galeria">
 
-            <a href="img/galeria/01.jpg" data-lightbox="galeria">
-                <img src="img/galeria/thumbs/01.jpg" alt="thumb-01">
+            <a href="{{ url_for('static', filename='img/galeria/01.jpg') }}" data-lightbox="galeria">
+                <img src="{{ url_for('static', filename='img/galeria/thumbs/01.jpg') }}" alt="thumb-01">
             </a>
 
-            <a href="img/galeria/02.jpg" data-lightbox="galeria">
-                <img src="img/galeria/thumbs/02.jpg" alt="thumb-02">
+            <a href="{{ url_for('static', filename='img/galeria/02.jpg') }}" data-lightbox="galeria">
+                <img src="{{ url_for('static', filename='img/galeria/thumbs/02.jpg') }}" alt="thumb-02">
             </a>
 
-            <a href="img/galeria/03.jpg" data-lightbox="galeria">
-                <img src="img/galeria/thumbs/03.jpg" alt="thumb-03">
+            <a href="{{ url_for('static', filename='img/galeria/03.jpg') }}" data-lightbox="galeria">
+                <img src="{{ url_for('static', filename='img/galeria/thumbs/03.jpg') }}" alt="thumb-03">
             </a>
 
-            <a href="img/galeria/04.jpg" data-lightbox="galeria">
-                <img src="img/galeria/thumbs/04.jpg" alt="thumb-04">
+            <a href="{{ url_for('static', filename='img/galeria/04.jpg') }}" data-lightbox="galeria">
+                <img src="{{ url_for('static', filename='img/galeria/thumbs/04.jpg') }}" alt="thumb-04">
             </a>
 
-            <a href="img/galeria/05.jpg" data-lightbox="galeria">
-                <img src="img/galeria/thumbs/05.jpg" alt="thumb-05">
+            <a href="{{ url_for('static', filename='img/galeria/05.jpg') }}" data-lightbox="galeria">
+                <img src="{{ url_for('static', filename='img/galeria/thumbs/05.jpg') }}" alt="thumb-05">
             </a>
 
-            <a href="img/galeria/06.jpg" data-lightbox="galeria">
-                <img src="img/galeria/thumbs/06.jpg" alt="thumb-06">
+            <a href="{{ url_for('static', filename='img/galeria/06.jpg') }}" data-lightbox="galeria">
+                <img src="{{ url_for('static', filename='img/galeria/thumbs/06.jpg') }}" alt="thumb-06">
             </a>
 
-            <a href="img/galeria/07.jpg" data-lightbox="galeria">
-                <img src="img/galeria/thumbs/07.jpg" alt="thumb-07">
+            <a href="{{ url_for('static', filename='img/galeria/07.jpg') }}" data-lightbox="galeria">
+                <img src="{{ url_for('static', filename='img/galeria/thumbs/07.jpg') }}" alt="thumb-07">
             </a>
 
-            <a href="img/galeria/08.jpg" data-lightbox="galeria">
-                <img src="img/galeria/thumbs/08.jpg" alt="thumb-08">
+            <a href="{{ url_for('static', filename='img/galeria/08.jpg') }}" data-lightbox="galeria">
+                <img src="{{ url_for('static', filename='img/galeria/thumbs/08.jpg') }}" alt="thumb-08">
             </a>
 
-            <a href="img/galeria/09.jpg" data-lightbox="galeria">
-                <img src="img/galeria/thumbs/09.jpg" alt="thumb-09">
+            <a href="{{ url_for('static', filename='img/galeria/09.jpg') }}" data-lightbox="galeria">
+                <img src="{{ url_for('static', filename='img/galeria/thumbs/09.jpg') }}" alt="thumb-09">
             </a>
 
-            <a href="img/galeria/10.jpg" data-lightbox="galeria">
-                <img src="img/galeria/thumbs/10.jpg" alt="thumb-10">
+            <a href="{{ url_for('static', filename='img/galeria/10.jpg') }}" data-lightbox="galeria">
+                <img src="{{ url_for('static', filename='img/galeria/thumbs/10.jpg') }}" alt="thumb-10">
             </a>
 
         </div>
@@ -216,16 +216,16 @@
     </footer> <!-- site-footer -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/vendor/modernizr-3.11.2.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/jquery.animateNumber.min.js"></script>
-    <script src="js/jquery.countdown.min.js"></script>
-    <script src="js/jquery.lettering.js"></script>
-    <script src="js/lightbox.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/modernizr-3.11.2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.animateNumber.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.countdown.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.lettering.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
-    <script src="js/main.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     
 
     <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->

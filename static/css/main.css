@@ -277,7 +277,7 @@ h1.nombre-sitio span {
 
 /** Header **/
 div.hero {
-  background-image: url(../img/online-study-illustration--938x535.png);
+  background: url('/static/img/online-study-illustration--938x535.png');
   height: 100vh;
   background-position: top center;
   background-size: cover;
