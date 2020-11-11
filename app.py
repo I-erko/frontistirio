@@ -20,6 +20,7 @@ def index():
 
 #ADMIN'S ROUTES
 
+#Evento
 @app.route('/listaEvento')
 def listaEvento():
     return render_template('lista-evento.html')
@@ -28,6 +29,11 @@ def listaEvento():
 def crearEvento():
     return render_template('crear-evento.html')
 
+@app.route('/editarEvento')
+def editarEvento():
+    return render_template('editar-evento.html')
+
+#Categoria
 @app.route('/listaCategoria')
 def listaCategoria():
     return render_template('lista-categoria.html')
@@ -36,6 +42,11 @@ def listaCategoria():
 def crearCategoria():
     return render_template('crear-categoria.html')
 
+@app.route('/editarCategoria')
+def editarCategoria():
+    return render_template('editar-categoria.html')
+
+#Invitado    
 @app.route('/listaInvitado')
 def listaInvitado():
     return render_template('lista-invitado.html')
@@ -44,6 +55,11 @@ def listaInvitado():
 def crearInvitado():
     return render_template('crear-invitado.html')
 
+@app.route('/editarInvitado')
+def editarInvitado():
+    return render_template('editar-invitado.html')
+
+#Admin
 @app.route('/listaAdmin')
 def listaAdmin():
     return render_template('lista-admin.html')
@@ -51,6 +67,10 @@ def listaAdmin():
 @app.route('/crearAdmin')
 def crearAdmin():
     return render_template('crear-admin.html')
+
+@app.route('/editarAdmin')
+def editarAdmin():
+    return render_template('editar-admin.html')
 
 
 if __name__ == '__main__':
