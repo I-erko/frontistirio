@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'password'
+app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'frontistirio'
 mysql = MySQL(app)
 
@@ -33,8 +33,6 @@ def conferencia():
 @app.route('/calendario')
 def calendario():
     return render_template('calendario.html')
-
-
 
 #-----ADMIN'S ROUTES-------
 
