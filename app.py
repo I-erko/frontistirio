@@ -1,6 +1,10 @@
-from flask import Flask, render_template
+import mantenedorCategoria
+import claseCategoria
+from flask import Flask, render_template, request, flash, redirect, url_for
 
 app = Flask(__name__)
+# Set the secret key to some random bytes. Keep this really secret!
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 #-------MAIN'S ROUTES----------
 
@@ -52,6 +56,22 @@ def listaCategoria():
 @app.route('/crearCategoria')
 def crearCategoria():
     return render_template('crear-categoria.html')
+
+@app.route('/mantenedor_categoria', methods=['POST'])
+def mantenedor_categoria():
+    if request.method == 'POST':
+        try:
+            auxBotonInsertar = request.form['btoInsertar']
+            if auxBotonInsertar == 'insertar':
+                auxId = 4
+                auxNombre = request.form['txtNombreCat']
+                auxIcono = request.form['txtIcono']
+                auxCategoria = claseCategoria.Categoria(auxId,auxNombre,auxIcono)
+                mantenedorCategoria.insertar(auxCategoria)
+                print('datos guardados')
+        except:
+            print('datos no guardados')
+        return redirect(url_for('mantenedor_categoria'))
 
 @app.route('/editarCategoria')
 def editarCategoria():

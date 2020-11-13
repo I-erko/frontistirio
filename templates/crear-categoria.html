@@ -273,27 +273,27 @@
         </div>
         <div class="card-body">
           <div class="col-md-8">
-            <form role="form" name="-admin" id="-admin" method="POST" action="">
+            <form role="form" name="-admin" id="-admin" method="POST" action="mantenedor_categoria">
               <div class="card-body">
                 <div class="form-group">
-                  <label for="categoria">Nombre:</label>
-                  <input type="text" class="form-control" id="nombre-categoria" name="nombre-categoria" placeholder="Categoría">
+                  <label for="txtNombreCat">Nombre:</label>
+                  <input type="text" class="form-control" name="txtNombreCat" id="txtNombreCat" placeholder="Categoría">
                 </div>
                 <div class="form-group">
-                  <label for="">Icono:</label>
+                  <label for="txtIcono">Icono:</label>
                   <div class="input-group">
                     <div class="input-group-addon">
                       <i class="fa fa-address-book"></i>
                     </div>
-                    <input type="text" id="icono" name="icono" class="form-control pull-right" placeholder="fa-icon" >
+                    <input type="text" name="txtIcono" id="txtIcono" class="form-control pull-right" placeholder="fa-icon" >
                   </div>
                 </div>
               </div>
               <!-- /.card-body -->
   
               <div class="card-footer">
-                <input type="hidden" name="agregar-admin" value="1">
-                <button type="submit" class="btn btn-primary">Agregar</button>
+                <input type="hidden" name="btoInsertar" value="1">
+                <button type="submit" name="btoInsertar" id="btoInsertar" value="insertar" class="btn btn-primary">Agregar</button>
               </div>
             </form>
           </div>

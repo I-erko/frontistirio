@@ -13,7 +13,7 @@ def insertar(categoria):
     try:
         with conexion.cursor() as cursor:
             consulta = "INSERT INTO categoria_evento () VALUES (%s,%s,%s);"
-            cursor.execute(consulta,(categoria.id_categoria,categoria.cat_evento,categoria.icono))
+            cursor.execute(consulta,(categoria.id_cat,categoria.cat_evento,categoria.icono))
         conexion.commit()
     except (pymysql.err.OperationalError,pymysql.err.InternalError) as ex:
         print("ocurrió un error al insertar ", ex)
@@ -69,7 +69,7 @@ def eliminar(auxIdCat):
     conexion.close()
 
 
-conectar()
+"""conectar()
 # auxCategoria = Categoria(60,"SAYONARA","SAYONARA")
 # insertar(auxCategoria)
 # print("Datos guardados")
@@ -78,4 +78,4 @@ consultar()
 # actualizar(auxCategoria)
 # buscar(60)   
 eliminar(60)
-consultar()
+consultar()"""
