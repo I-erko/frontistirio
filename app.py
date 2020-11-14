@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 
 app = Flask(__name__)
 # Set the secret key to some random bytes. Keep this really secret!
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+# app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 #-------MAIN'S ROUTES----------
 
@@ -51,27 +51,29 @@ def editarEvento():
 #Categoria
 @app.route('/listaCategoria')
 def listaCategoria():
-    return render_template('lista-categoria.html')
+    datos = mantenedorCategoria.consultar()
+    return render_template('lista-categoria.html', categorias = datos)
 
 @app.route('/crearCategoria')
 def crearCategoria():
     return render_template('crear-categoria.html')
 
-@app.route('/mantenedor_categoria', methods=['POST'])
+@app.route('/mantenedor_categoria', methods = ['POST'])
 def mantenedor_categoria():
     if request.method == 'POST':
         try:
             auxBotonInsertar = request.form['btoInsertar']
-            if auxBotonInsertar == 'insertar':
-                auxId = 4
-                auxNombre = request.form['txtNombreCat']
-                auxIcono = request.form['txtIcono']
-                auxCategoria = claseCategoria.Categoria(auxId,auxNombre,auxIcono)
+            if auxBotonInsertar == 'Insertar':
+                auxNombreCategoria = request.form['txtCategoria']
+                auxIcono = request.form['txticono']
+                auxCategoria = claseCategoria.Categoria(auxNombreCategoria,auxIcono)
                 mantenedorCategoria.insertar(auxCategoria)
                 print('datos guardados')
+                #flash('datos guardados')
         except:
-            print('datos no guardados')
-        return redirect(url_for('mantenedor_categoria'))
+            print('datos No guardados')
+
+        return redirect(url_for('crearCategoria'))   
 
 @app.route('/editarCategoria')
 def editarCategoria():

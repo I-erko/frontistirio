@@ -3,7 +3,7 @@ from claseCategoria import Categoria
 
 def conectar():
     try:
-        conexion = pymysql.connect(host='localhost',user='root',password='',db='frontistirio')
+        conexion = pymysql.connect(host='localhost',user='root',password='',db='frontistiriodb')
     except:
         print("Error en la conexión")
     return conexion
@@ -12,12 +12,12 @@ def insertar(categoria):
     conexion = conectar()
     try:
         with conexion.cursor() as cursor:
-            consulta = "INSERT INTO categoria_evento () VALUES (%s,%s,%s);"
-            cursor.execute(consulta,(categoria.id_cat,categoria.cat_evento,categoria.icono))
+            consulta = "INSERT INTO categoria_evento (cat_evento,icono) VALUES (%s,%s);"
+            cursor.execute(consulta,(categoria.cat_evento, categoria.icono))
         conexion.commit()
-    except (pymysql.err.OperationalError,pymysql.err.InternalError) as ex:
-        print("ocurrió un error al insertar ", ex)
-    conexion.close()
+    except (pymysql.err.OperationalError,pymysql.err.InternalError) as e:
+        print("Error de SQL:",e)
+    conexion.close()    
 
 def consultar():
     conexion = conectar()
@@ -67,15 +67,3 @@ def eliminar(auxIdCat):
     except (pymysql.err.OperationalError,pymysql.err.InternalError) as ex:
         print("ocurrió un error al actualizar ", ex)
     conexion.close()
-
-
-"""conectar()
-# auxCategoria = Categoria(60,"SAYONARA","SAYONARA")
-# insertar(auxCategoria)
-# print("Datos guardados")
-consultar()
-# buscar(3)        
-# actualizar(auxCategoria)
-# buscar(60)   
-eliminar(60)
-consultar()"""
