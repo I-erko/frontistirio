@@ -290,42 +290,20 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>{{categorias[0][1]}}</td>
-                        <td><i class="fa fa-code"></i></td>
-                        <td>
-                          <a href="{{ url_for('editarCategoria') }}" class="btn btn-lg bg-orange margin">
-                            <i class="far fa-edit"></i>
-                          </a>
-                          <a href="#" class="btn btn-lg bg-maroon margin">
-                            <i class="far fa-trash-alt"></i>
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Seminario</td>
-                        <td><i class="fa fa-university"></i></td>
-                        <td>
-                          <a href="{{ url_for('editarCategoria') }}" class="btn btn-lg bg-orange margin">
-                            <i class="{{categorias[0][2]}}"></i>
-                          </a>
-                          <a href="#" class="btn btn-lg bg-maroon margin">
-                            <i class="far fa-trash-alt"></i>
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Conferencia</td>
-                        <td><i class="fa fa-comments"></i></td>
-                        <td>
-                          <a href="{{ url_for('editarCategoria') }}" class="btn btn-lg bg-orange margin">
-                            <i class="far fa-edit"></i>
-                          </a>
-                          <a href="#" class="btn btn-lg bg-maroon margin">
-                            <i class="far fa-trash-alt"></i>
-                          </a>
-                        </td>
-                      </tr>
+                      {% for cat in categorias %}
+                        <tr>
+                          <td>{{cat.1}}</td>
+                          <td><i class="fa {{cat.2}}"></i></td>
+                          <td>
+                            <a href="{{ url_for('editarCategoria') }}" class="btn btn-lg bg-orange margin">
+                              <i class="far fa-edit"></i>
+                            </a>
+                            <a href="#" class="btn btn-lg bg-maroon margin">
+                              <i class="far fa-trash-alt"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      {% endfor %}
                     </tbody>
                     <tfoot>
                       <tr>
