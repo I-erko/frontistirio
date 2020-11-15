@@ -298,7 +298,7 @@
                             <a href="{{ url_for('editarCategoria') }}" class="btn btn-lg bg-orange margin">
                               <i class="far fa-edit"></i>
                             </a>
-                            <a href="#" class="btn btn-lg bg-maroon margin">
+                            <a href="{{ url_for('eliminar_categoria', id_cat=cat.0) }}" class="btn btn-lg bg-maroon margin">
                               <i class="far fa-trash-alt"></i>
                             </a>
                           </td>

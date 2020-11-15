@@ -6,7 +6,7 @@ app = Flask(__name__)
 # Set the secret key to some random bytes. Keep this really secret!
 # app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-#-------MAIN'S ROUTES----------
+# ////////////////// MAIN ROUTES //////////////////
 
 @app.route('/')
 def index():
@@ -28,14 +28,14 @@ def conferencia():
 def calendario():
     return render_template('calendario.html')
 
-#-----ADMIN'S ROUTES-------
+# ////////////////// ADMINISTRATOR ROUTES //////////////////
 
-#Login
+#LOGIN
 @app.route('/login')
 def login():
     return render_template('login.html')
 
-#Evento
+#EVENTO
 @app.route('/listaEvento')
 def listaEvento():
     return render_template('lista-evento.html')
@@ -48,7 +48,7 @@ def crearEvento():
 def editarEvento():
     return render_template('editar-evento.html')
 
-#Categoria
+#CATEGORÍA
 @app.route('/listaCategoria')
 def listaCategoria():
     datos = mantenedorCategoria.consultar()
@@ -56,30 +56,13 @@ def listaCategoria():
 
 @app.route('/crearCategoria')
 def crearCategoria():
-    return render_template('crear-categoria.html')
-
-@app.route('/mantenedor_categoria', methods = ['POST'])
-def mantenedor_categoria():
-    if request.method == 'POST':
-        try:
-            auxBotonInsertar = request.form['btoInsertar']
-            if auxBotonInsertar == 'Insertar':
-                auxNombreCategoria = request.form['txtCategoria']
-                auxIcono = request.form['txticono']
-                auxCategoria = claseCategoria.Categoria(auxNombreCategoria,auxIcono)
-                mantenedorCategoria.insertar(auxCategoria)
-                print('datos guardados')
-                #flash('datos guardados')
-        except:
-            print('datos No guardados')
-
-        return redirect(url_for('crearCategoria'))   
+    return render_template('crear-categoria.html')  
 
 @app.route('/editarCategoria')
 def editarCategoria():
     return render_template('editar-categoria.html')
 
-#Invitado    
+#INVITADO  
 @app.route('/listaInvitado')
 def listaInvitado():
     return render_template('lista-invitado.html')
@@ -92,7 +75,7 @@ def crearInvitado():
 def editarInvitado():
     return render_template('editar-invitado.html')
 
-#Admin
+#ADMIN
 @app.route('/listaAdmin')
 def listaAdmin():
     return render_template('lista-admin.html')
@@ -104,6 +87,39 @@ def crearAdmin():
 @app.route('/editarAdmin')
 def editarAdmin():
     return render_template('editar-admin.html')
+
+# ////////////////// MAINTENANCE ROUTES //////////////////
+
+#--------CATEGORY MAINTAINER
+# INSERTAR
+@app.route('/insertar_categoria', methods = ['POST'])
+def insertar_categoria():
+    if request.method == 'POST':
+        try:
+            auxBotonInsertar = request.form['btoInsertar']
+            if auxBotonInsertar == 'Insertar':
+                auxNombreCategoria = request.form['txtCategoria']
+                auxIcono = request.form['txticono']
+                auxCategoria = claseCategoria.Categoria(auxNombreCategoria,auxIcono)
+                mantenedorCategoria.insertar(auxCategoria)
+                print('datos guardados')
+                #flash('datos guardados')
+        except:
+            print('datos No guardados')
+        return redirect(url_for('crearCategoria'))   
+
+#ELIMINAR
+@app.route('/eliminar_categoria/<int:id_cat>')
+def eliminar_categoria(id_cat):
+    if request.method == 'GET':
+        try:
+            mantenedorCategoria.eliminar(id_cat)
+            print('datos Eliminados')
+            #flash('datos Eliminados')
+        except:
+            print('datos No Eliminados')
+            #flash('datos No Eliminados')
+        return redirect(url_for('listaCategoria')) 
 
 
 if __name__ == '__main__':
