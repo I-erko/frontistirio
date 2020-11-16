@@ -58,9 +58,9 @@ def listaCategoria():
 def crearCategoria():
     return render_template('crear-categoria.html')  
 
-@app.route('/editarCategoria')
-def editarCategoria():
-    return render_template('editar-categoria.html')
+@app.route('/editarCategoria/<string:nombre>/<string:icono>')
+def editarCategoria(nombre,icono):
+    return render_template('editar-categoria.html', nombreCat=nombre, iconoCat = icono)
 
 #INVITADO  
 @app.route('/listaInvitado')
@@ -121,7 +121,12 @@ def eliminar_categoria(id_cat):
             #flash('datos No Eliminados')
         return redirect(url_for('listaCategoria')) 
 
+#ACTUALIZAR
+# @app.route('/actualizar_categoria')
+# def actualizar_categoria(nombre,icono):
 
+
+    
 if __name__ == '__main__':
     app.run(port = 3000, debug = True)
 
