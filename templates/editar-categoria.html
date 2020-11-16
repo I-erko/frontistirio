@@ -282,7 +282,7 @@
         </div>
         <div class="card-body">
           <div class="col-md-8">
-            <form role="form" name="-admin" id="-admin" method="POST" action="/actualizar_categoria">
+            <form role="form" name="-admin" id="-admin" method="POST" action="{{ url_for('actualizar_categoria', id_cat=idCat) }}">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="txtCategoria">Nombre:</label>

@@ -51,7 +51,7 @@ def actualizar(categoria):
     try:
         with conexion.cursor() as cursor:
             consulta = "UPDATE categoria_evento SET cat_evento = %s,icono = %s WHERE id_categoria = %s;"
-            cursor.execute(consulta,(categoria.cat_evento,categoria.icono,categoria.id_categoria))
+            cursor.execute(consulta,(categoria.cat_evento,categoria.icono,categoria.id_cat))
         conexion.commit()
     except (pymysql.err.OperationalError,pymysql.err.InternalError) as ex:
         print("ocurrió un error al actualizar ", ex)

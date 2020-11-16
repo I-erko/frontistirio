@@ -296,7 +296,7 @@
                           <td><i class="fa {{cat.2}}"></i></td>
 
                           <td>
-                            <a href="{{ url_for('editarCategoria', nombre=cat.1, icono=cat.2)}}" class="btn btn-lg bg-orange margin">
+                            <a href="{{ url_for('editarCategoria', id_cat=cat.0, nombre=cat.1, icono=cat.2)}}" class="btn btn-lg bg-orange margin">
                               <i class="far fa-edit"></i>
                             </a>
                             <a href="{{ url_for('eliminar_categoria', id_cat=cat.0) }}" class="btn btn-lg bg-maroon margin">

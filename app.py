@@ -58,9 +58,9 @@ def listaCategoria():
 def crearCategoria():
     return render_template('crear-categoria.html')  
 
-@app.route('/editarCategoria/<string:nombre>/<string:icono>')
-def editarCategoria(nombre,icono):
-    return render_template('editar-categoria.html', nombreCat=nombre, iconoCat = icono)
+@app.route('/editarCategoria/<int:id_cat>/<string:nombre>/<string:icono>')
+def editarCategoria(id_cat,nombre,icono):
+    return render_template('editar-categoria.html', idCat=id_cat, nombreCat=nombre, iconoCat = icono)
 
 #INVITADO  
 @app.route('/listaInvitado')
@@ -98,9 +98,10 @@ def insertar_categoria():
         try:
             auxBotonInsertar = request.form['btoInsertar']
             if auxBotonInsertar == 'Insertar':
+                auxIdCat = ''
                 auxNombreCategoria = request.form['txtCategoria']
                 auxIcono = request.form['txticono']
-                auxCategoria = claseCategoria.Categoria(auxNombreCategoria,auxIcono)
+                auxCategoria = claseCategoria.Categoria(auxIdCat,auxNombreCategoria,auxIcono)
                 mantenedorCategoria.insertar(auxCategoria)
                 print('datos guardados')
                 #flash('datos guardados')
@@ -122,22 +123,24 @@ def eliminar_categoria(id_cat):
         return redirect(url_for('listaCategoria')) 
 
 #ACTUALIZAR
-@app.route('/actualizar_categoria', methods = ['POST'])
-def actualizar_categoria():
+@app.route('/actualizar_categoria/<int:id_cat>', methods = ['POST'])
+def actualizar_categoria(id_cat):
     if request.method == 'POST':
         try:
             auxBotonActualizar = request.form['btoActualizar']
+
             if auxBotonActualizar == 'Actualizar':
+                auxIdCat = id_cat
                 auxNombreCat = request.form['txtCategoria']
                 auxIcono = request.form['txticono']
-                auxCategoria = mantenedorCategoria.Categoria(auxNombreCat,auxIcono)
+                auxCategoria = mantenedorCategoria.Categoria(auxIdCat,auxNombreCat,auxIcono)
                 mantenedorCategoria.actualizar(auxCategoria)
                 print('datos Actualizados')
                 #flash('datos Actualizados')
         except:
             print('datos No Actualizados')
             #flash('datos No Actualizados')
-        return redirect(url_for('editarCategoria'))
+        return redirect(url_for('listaCategoria'))
 
 
     
