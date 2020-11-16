@@ -122,8 +122,22 @@ def eliminar_categoria(id_cat):
         return redirect(url_for('listaCategoria')) 
 
 #ACTUALIZAR
-# @app.route('/actualizar_categoria')
-# def actualizar_categoria(nombre,icono):
+@app.route('/actualizar_categoria', methods = ['POST'])
+def actualizar_categoria():
+    if request.method == 'POST':
+        try:
+            auxBotonActualizar = request.form['btoActualizar']
+            if auxBotonActualizar == 'Actualizar':
+                auxNombreCat = request.form['txtCategoria']
+                auxIcono = request.form['txticono']
+                auxCategoria = mantenedorCategoria.Categoria(auxNombreCat,auxIcono)
+                mantenedorCategoria.actualizar(auxCategoria)
+                print('datos Actualizados')
+                #flash('datos Actualizados')
+        except:
+            print('datos No Actualizados')
+            #flash('datos No Actualizados')
+        return redirect(url_for('editarCategoria'))
 
 
     

@@ -282,7 +282,7 @@
         </div>
         <div class="card-body">
           <div class="col-md-8">
-            <form role="form" name="-admin" id="-admin" method="POST" action="">
+            <form role="form" name="-admin" id="-admin" method="POST" action="/actualizar_categoria">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="txtCategoria">Nombre:</label>
@@ -301,8 +301,10 @@
               <!-- /.card-body -->
   
               <div class="card-footer">
-                <input type="hidden" name="agregar-admin" value="1">
-                <button type="submit" class="btn btn-primary">Agregar</button>
+                
+                <input type="submit" name="btoActualizar" id="btoActualizar" value="Actualizar">
+
+                <!-- <button type="submit" class="btn btn-primary">Agregar</button> -->
               </div>
             </form>
           </div>
