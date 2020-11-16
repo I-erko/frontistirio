@@ -20,6 +20,15 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
+    {% with messages = get_flashed_messages() %}
+      {% if messages  %}
+        <ul class=flashes>
+          {% for message in messages  %}
+            <li>{{message}}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith  %}
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
@@ -58,7 +67,7 @@
             <a href="../../index.html" class="brand-link">
                 <img src="../img/AdminLTELogo.png" alt="Frontistirio Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
-                <span class="brand-text font-weight-light"><b>F</b>rontistirio</span>
+                <span class="brand-text font-weight-light"><b>F</b>rontistirio</span>                
             </a>
 
             <!-- Sidebar -->
@@ -275,33 +284,32 @@
                     </div>
                     <div class="card-body">
                         <div class="col-md-8">
-                            <form role="form" name="-admin" id="-admin" method="POST" action="">
+                            <form role="form" name="-admin" id="-admin" method="POST" action="{{ url_for('actualizar_invitado', id_inv=idInv) }}">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="nombre_invitado">Nombre:</label>
-                                        <input type="text" class="form-control" id="nombre-invitado"
-                                            name="nombre-invitado" placeholder="Nombre del invitado">
+                                        <label for="txtNombre">Nombre:</label>
+                                        <input type="text" class="form-control" id="txtNombre" name="txtNombre" value="{{nameInv}}" placeholder="Nombre del invitado">
                                     </div>
                                     <div class="form-group">
-                                        <label for="apellido_invitado">Apellido:</label>
-                                        <input type="text" class="form-control" id="apellido-invitado"
-                                            name="apellido-invitado" placeholder="Apellido del invitado">
+                                        <label for="txtApellido">Apellido:</label>
+                                        <input type="text" class="form-control" id="txtApellido" name="txtApellido" value="{{apeInv}}" placeholder="Apellido del invitado">
                                     </div>
                                     <div class="form-group">
-                                        <label for="bio_invitado">Biografía:</label>
-                                        <textarea class="form-control" name="bio_invitado" id="bio_invitado" rows="10" placeholder="Biografía del invitado"></textarea>
+                                        <label for="txtDescripcion">Biografía:</label>
+                                        <textarea class="form-control" name="txtDescripcion" id="txtDescripcion" rows="10" placeholder="Biografía del invitado">{{descInv}}</textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="imagen_invitado">Imagen</label>
-                                        <input class="form-control" type="file" id="imagen_invitado" name="archivo_imagen">
+                                        <label for="imgInvitado">Imagen</label>
+                                        <input class="form-control" type="file" id="imgInvitado" value="{{urlImg}}" name="imgInvitado">
                                         <p class="help-block">Agregue la imagen del invitado aquí</p>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <input type="hidden" name="agregar-admin" value="1">
-                                    <button type="submit" class="btn btn-primary">Agregar</button>
+                                    <input type="submit" name="btoActualizar" id="btoActualizar" value="Actualizar">
+                                    <!-- <input type="hidden" name="agregar-admin" value="1"> -->
+                                    <!-- <button type="submit" class="btn btn-primary">Agregar</button> -->
                                 </div>
                             </form>
                         </div>
@@ -309,7 +317,6 @@
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
-
             </section>
             <!-- /.content -->
         </div>

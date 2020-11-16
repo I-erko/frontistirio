@@ -22,6 +22,15 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
+    {% with messages = get_flashed_messages() %}
+      {% if messages  %}
+        <ul class=flashes>
+          {% for message in messages  %}
+            <li>{{message}}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith  %}
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -282,51 +291,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                          {% for inv in invitados %}
                                             <tr>
-                                                <td>Francisco Quiroz</td>
-                                                <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                                                    Nesciunt neque aut perspiciatis, sit sed, deserunt ratione 
-                                                    rem voluptatem alias deleniti delectus.</td>
-                                                <td>Imagen1.jpg</td>
+                                                <td>{{inv.1}} {{inv.2}}</td>
+                                                <td>{{inv.3}}</td>
+                                                <td>{{inv.4}}</td>
                                                 <td>
-                                                    <a href="{{ url_for('editarInvitado') }}" class="btn btn-lg bg-orange margin">
+                                                    <a href="{{ url_for('editarInvitado', id_Inv=inv.0, name_Inv=inv.1, ape_Inv=inv.2, desc_Inv=inv.3, url_Img=inv.4) }}" class="btn btn-lg bg-orange margin">
                                                         <i class="far fa-edit"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-lg bg-maroon m-2">
+                                                    <a href="{{ url_for('eliminar_invitado', id_inv=inv.0) }}" class="btn btn-lg bg-maroon m-2">
                                                         <i class="far fa-trash-alt"></i>
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>Ricardo Mendoza</td>
-                                                <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                                                    Nesciunt neque aut perspiciatis, sit sed, deserunt ratione 
-                                                    rem voluptatem alias deleniti delectus.</td>
-                                                <td>Imagen2.jpg</td>
-                                                <td>
-                                                    <a href="{{ url_for('editarInvitado') }}" class="btn btn-lg bg-orange margin">
-                                                        <i class="far fa-edit"></i>
-                                                    </a>
-                                                    <a href="#" class="btn btn-lg bg-maroon m-2">
-                                                        <i class="far fa-trash-alt"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ernesto Sosa</td>
-                                                <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                                                    Nesciunt neque aut perspiciatis, sit sed, deserunt ratione 
-                                                    rem voluptatem alias deleniti delectus.</td>
-                                                <td>Imagen3.jpg</td>
-                                                <td>
-                                                    <a href="{{ url_for('editarInvitado') }}" class="btn btn-lg bg-orange margin">
-                                                        <i class="far fa-edit"></i>
-                                                    </a>
-                                                    <a href="#" class="btn btn-lg bg-maroon m-2">
-                                                        <i class="far fa-trash-alt"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                          {% endfor %}
                                         </tbody>
                                         <tfoot>
                                             <tr>

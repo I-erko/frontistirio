@@ -275,35 +275,32 @@
                     </div>
                     <div class="card-body">
                         <div class="col-md-8">
-                            <form role="form" name="-admin" id="-admin" method="POST" action="">
+                            <form role="form" name="-admin" id="-admin" method="POST" action="/insertar_invitado">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="nombre_invitado">Nombre:</label>
-                                        <input type="text" class="form-control" id="nombre-invitado"
-                                            name="nombre-invitado" placeholder="Nombre del invitado">
+                                        <label for="txtNombre">Nombre:</label>
+                                        <input type="text" class="form-control" id="txtNombre" name="txtNombre" placeholder="Nombre del invitado">
                                     </div>
                                     <div class="form-group">
-                                        <label for="apellido_invitado">Apellido:</label>
-                                        <input type="text" class="form-control" id="apellido-invitado"
-                                            name="apellido-invitado" placeholder="Apellido del invitado">
+                                        <label for="txtApellido">Apellido:</label>
+                                        <input type="text" class="form-control" id="txtApellido" name="txtApellido" placeholder="Apellido del invitado">
                                     </div>
                                     <div class="form-group">
-                                        <label for="bio_invitado">Biografía:</label>
-                                        <textarea class="form-control" name="bio_invitado" id="bio_invitado" rows="10"
-                                            placeholder="Biografía del invitado"></textarea>
+                                        <label for="txtDescripcion">Biografía:</label>
+                                        <textarea class="form-control" name="txtDescripcion" id="txtDescripcion" rows="10" placeholder="Biografía del invitado"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="imagen_invitado">Imagen</label>
-                                        <input class="form-control" type="file" id="imagen_invitado"
-                                            name="archivo_imagen">
+                                        <label for="txtUrl">Imagen</label>
+                                        <input class="form-control" type="file" id="txtUrl" name="txtUrl">
                                         <p class="help-block">Agregue la imagen del invitado aquí</p>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <input type="hidden" name="agregar-admin" value="1">
-                                    <button type="submit" class="btn btn-primary">Agregar</button>
+                                    <input type="submit" name="btoInsertar" id="btoInsertar" value="Insertar">
+                                    <!-- <input type="hidden" name="agregar-admin" value="1">
+                                    <button type="submit" class="btn btn-primary">Agregar</button> -->
                                 </div>
                             </form>
                         </div>
