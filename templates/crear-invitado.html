@@ -275,7 +275,7 @@
                     </div>
                     <div class="card-body">
                         <div class="col-md-8">
-                            <form role="form" name="-admin" id="-admin" method="POST" action="/insertar_invitado">
+                            <form role="form" name="-admin" id="-admin" method="POST" enctype="multipart/form-data" action="/insertar_invitado">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="txtNombre">Nombre:</label>
@@ -291,7 +291,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="txtUrl">Imagen</label>
-                                        <input class="form-control" type="file" id="txtUrl" name="txtUrl">
+                                        <input class="form-control" type="file" accept="image/*" id="txtUrl" name="txtUrl" capture>
                                         <p class="help-block">Agregue la imagen del invitado aquí</p>
                                     </div>
                                 </div>

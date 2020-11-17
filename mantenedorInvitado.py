@@ -3,7 +3,7 @@ from claseInvitado import Invitado
 
 def conectar():
     try:
-        conexion = pymysql.connect(host='localhost',user='root',password='',db='frontistirio')
+        conexion = pymysql.connect(host='localhost',user='root',password='',db='frontistiriodb')
     except:
         print("Error en la conexión")
     return conexion
@@ -57,12 +57,12 @@ def actualizar(invitado):
         print("ocurrió un error al actualizar ", ex)
     conexion.close()
 
-def eliminar(auxIdCat):
+def eliminar(id_inv):
     conexion = conectar()
     try:
         with conexion.cursor() as cursor:
             consulta = "DELETE FROM invitado WHERE id_invitado = %s;"
-            cursor.execute(consulta,(auxIdCat))
+            cursor.execute(consulta,(id_inv))
         conexion.commit()
     except (pymysql.err.OperationalError,pymysql.err.InternalError) as ex:
         print("ocurrió un error al actualizar ", ex)

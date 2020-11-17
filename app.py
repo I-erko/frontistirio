@@ -3,6 +3,9 @@ import mantenedorInvitado
 import claseCategoria
 import claseInvitado
 from flask import Flask, render_template, request, flash, redirect, url_for
+import uuid
+import os
+
 
 app = Flask(__name__)
 # Set the secret key to some random bytes. Keep this really secret!
@@ -157,8 +160,12 @@ def insertar_invitado():
                 auxNombre = request.form['txtNombre']
                 auxApellido = request.form['txtApellido']
                 auxDescripcion = request.form['txtDescripcion']
-                auxUrlImg = request.form['txtUrl']
-                auxInvitado = claseInvitado.Invitado(auxIdInvitado,auxNombre,auxApellido,auxDescripcion,auxUrlImg)
+
+                auxUrlImg = request.files['txtUrl']
+                newAuxUrlImg = str(uuid.uuid1()) + os.path.splitext(auxUrlImg.filename)[1]
+                auxUrlImg.save(os.path.join("static/images", newAuxUrlImg))
+
+                auxInvitado = claseInvitado.Invitado(auxIdInvitado,auxNombre,auxApellido,auxDescripcion,newAuxUrlImg)
                 mantenedorInvitado.insertar(auxInvitado)
                 print('datos guardados')
                 #flash('datos guardados')
@@ -191,8 +198,12 @@ def actualizar_invitado(id_inv):
                 auxNombreInv = request.form['txtNombre']
                 auxApellidoInv = request.form['txtApellido']
                 auxDescripcionInv = request.form['txtDescripcion']
-                auxImagenInv = request.form['imgInvitado']
-                auxInvitado = mantenedorInvitado.Invitado(auxIdInv,auxNombreInv,auxApellidoInv,auxDescripcionInv,auxImagenInv)
+
+                auxUrlImg = request.files['imgInvitado']
+                newAuxUrlImg = str(uuid.uuid1()) + os.path.splitext(auxUrlImg.filename)[1]
+                auxUrlImg.save(os.path.join("static/images", newAuxUrlImg))
+
+                auxInvitado = claseInvitado.Invitado(auxIdInv,auxNombreInv,auxApellidoInv,auxDescripcionInv,newAuxUrlImg)
                 mantenedorInvitado.actualizar(auxInvitado)
                 print('datos Actualizados')
                 #flash('datos Actualizados')

@@ -3,7 +3,7 @@ from claseCategoria import Categoria
 
 def conectar():
     try:
-        conexion = pymysql.connect(host='localhost',user='root',password='',db='frontistirio')
+        conexion = pymysql.connect(host='localhost',user='root',password='',db='frontistiriodb')
     except:
         print("Error en la conexión")
     return conexion
