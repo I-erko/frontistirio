@@ -5,6 +5,7 @@ import claseCategoria
 import claseInvitado
 import claseAdmin
 from flask import Flask, render_template, request, flash, redirect, url_for
+from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
 import os
 
@@ -46,7 +47,6 @@ def calendario():
 @app.route("/login")
 def login():
     return render_template("login.html")
-
 
 # EVENTO
 # region
@@ -314,7 +314,7 @@ def insertar_admin():
                 auxIdAdmin = ""
                 auxUsuario = request.form["txtUsuario"]
                 auxNombre = request.form["txtNombre"]
-                auxPassword = request.form["txtPassword"]
+                auxPassword = generate_password_hash(request.form["txtPassword"], method="sha256")
 
                 # auxUrlImg = request.files["txtUrl"]
                 # newAuxUrlImg = (str(uuid.uuid1()) + os.path.splitext(auxUrlImg.filename)[1])
