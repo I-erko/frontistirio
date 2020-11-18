@@ -302,6 +302,8 @@ def actualizar_invitado(id_inv):
 # endregion
 
 # ADMINISTRATORS' MAINTAINER
+# region
+
 # INSERTAR
 @app.route("/insertar_admin", methods=["POST"])
 def insertar_admin():
@@ -328,6 +330,7 @@ def insertar_admin():
             print("datos No guardados")
         return redirect(url_for("listaAdmin"))
 
+
 # ACTUALIZAR
 @app.route("/actualizar_admin/<int:idAdmin>", methods=["POST"])
 def actualizar_admin(idAdmin):
@@ -348,10 +351,7 @@ def actualizar_admin(idAdmin):
                 # auxUrlImg.save(os.path.join("static/images", newAuxUrlImg))
 
                 auxAdmin = claseAdmin.Admin(
-                    auxIdAdm,
-                    auxUserAdm,
-                    auxNombreAdm,
-                    auxPassAdm
+                    auxIdAdm, auxUserAdm, auxNombreAdm, auxPassAdm
                 )
                 mantenedorAdmin.actualizar(auxAdmin)
                 print("datos Actualizados")
@@ -360,6 +360,23 @@ def actualizar_admin(idAdmin):
             print("datos No Actualizados")
             # flash('datos No Actualizados')
         return redirect(url_for("listaAdmin"))
+
+
+# ELIMINAR
+@app.route("/eliminar_admin/<int:idAdmin>")
+def eliminar_admin(idAdmin):
+    if request.method == "GET":
+        try:
+            mantenedorAdmin.eliminar(idAdmin)
+            print("datos Eliminados")
+            # flash('datos Eliminados')
+        except:
+            print("datos No Eliminados")
+            # flash('datos No Eliminados')
+        return redirect(url_for("listaAdmin"))
+
+
+# endregion
 
 
 if __name__ == "__main__":

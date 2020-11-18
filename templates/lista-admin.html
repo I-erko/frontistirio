@@ -299,7 +299,7 @@
                             <a href="{{ url_for('editarAdmin', idAdmin=adm.0, userAdmin=adm.1, nameAdmin=adm.2, passAdmin=adm.3) }}" class="btn btn-lg bg-orange margin">
                               <i class="far fa-edit"></i>
                             </a>
-                            <a href="#" class="btn btn-lg bg-maroon margin">
+                            <a href="{{ url_for('eliminar_admin', idAdmin=adm.0) }}" class="btn btn-lg bg-maroon margin">
                               <i class="far fa-trash-alt"></i>
                             </a>
                           </td>

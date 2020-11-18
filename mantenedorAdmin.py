@@ -57,13 +57,13 @@ def actualizar(admin):
         print("ocurrió un error al actualizar ", ex)
     conexion.close()
 
-# def eliminar(auxIdCat):
-#     conexion = conectar()
-#     try:
-#         with conexion.cursor() as cursor:
-#             consulta = "DELETE FROM categoria_evento WHERE id_categoria = %s;"
-#             cursor.execute(consulta,(auxIdCat))
-#         conexion.commit()
-#     except (pymysql.err.OperationalError,pymysql.err.InternalError) as ex:
-#         print("ocurrió un error al actualizar ", ex)
-#     conexion.close()
+def eliminar(idAdmin):
+    conexion = conectar()
+    try:
+        with conexion.cursor() as cursor:
+            consulta = "DELETE FROM admin WHERE id_admin = %s;"
+            cursor.execute(consulta,(idAdmin))
+        conexion.commit()
+    except (pymysql.err.OperationalError,pymysql.err.InternalError) as ex:
+        print("ocurrió un error al actualizar ", ex)
+    conexion.close()
