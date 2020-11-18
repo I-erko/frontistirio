@@ -295,7 +295,7 @@
                       <tr>
                         <td>{{inv.1}} {{inv.2}}</td>
                         <td>{{inv.3}}</td>
-                        <td><img src="{{ url_for('static', filename='images/'+inv.4 ) }}"></td>
+                        <td><img class="rounded img-fluid" width="100" height="100" src="{{ url_for('static', filename='images/'+inv.4 ) }}"></td>
                         
                         <td>
                           <a href="{{ url_for('editarInvitado', id_Inv=inv.0, name_Inv=inv.1, ape_Inv=inv.2, desc_Inv=inv.3, url_Img=inv.4) }}"
