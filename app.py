@@ -1,7 +1,9 @@
 import mantenedorCategoria
 import mantenedorInvitado
+import mantenedorAdmin
 import claseCategoria
 import claseInvitado
+import claseAdmin
 from flask import Flask, render_template, request, flash, redirect, url_for
 import uuid
 import os
@@ -12,25 +14,31 @@ app = Flask(__name__)
 
 # ////////////////// MAIN ROUTES //////////////////
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
+
 
 @app.route("/registro")
 def registro():
     return render_template("registro.html")
 
+
 @app.route("/invitados")
 def invitados():
     return render_template("invitados.html")
+
 
 @app.route("/conferencia")
 def conferencia():
     return render_template("conferencia.html")
 
+
 @app.route("/calendario")
 def calendario():
     return render_template("calendario.html")
+
 
 # ////////////////// ADMINISTRATOR ROUTES //////////////////
 
@@ -38,6 +46,7 @@ def calendario():
 @app.route("/login")
 def login():
     return render_template("login.html")
+
 
 # EVENTO
 # region
@@ -87,6 +96,7 @@ def editarCategoria(id_cat, nombre, icono):
 # INVITADO
 # region
 
+
 @app.route("/listaInvitado")
 def listaInvitado():
     datos = mantenedorInvitado.consultar()
@@ -111,6 +121,7 @@ def editarInvitado(id_Inv, name_Inv, ape_Inv, desc_Inv, url_Img):
         urlImg=url_Img,
     )
 
+
 # endregion
 
 # ADMIN
@@ -119,7 +130,8 @@ def editarInvitado(id_Inv, name_Inv, ape_Inv, desc_Inv, url_Img):
 
 @app.route("/listaAdmin")
 def listaAdmin():
-    return render_template("lista-admin.html")
+    datos = mantenedorAdmin.consultar()
+    return render_template("lista-admin.html", administradores=datos)
 
 
 @app.route("/crearAdmin")
@@ -127,13 +139,20 @@ def crearAdmin():
     return render_template("crear-admin.html")
 
 
-@app.route("/editarAdmin")
-def editarAdmin():
-    return render_template("editar-admin.html")
+@app.route(
+    "/editarAdmin/<int:idAdmin>/<string:userAdmin>/<string:nameAdmin>/<string:passAdmin>"
+)
+def editarAdmin(idAdmin, userAdmin, nameAdmin, passAdmin):
+    return render_template(
+        "editar-admin.html",
+        id_admin=idAdmin,
+        user_admin=userAdmin,
+        name_admin=nameAdmin,
+        pass_admin=passAdmin,
+    )
 
 
 # endregion
-
 
 # ////////////////// MAINTENANCE ROUTES //////////////////
 
@@ -230,6 +249,7 @@ def insertar_invitado():
             print("datos No guardados")
         return redirect(url_for("listaInvitado"))
 
+
 # ELIMINAR
 @app.route("/eliminar_invitado/<int:id_inv>")
 def eliminar_invitado(id_inv):
@@ -242,6 +262,7 @@ def eliminar_invitado(id_inv):
             print("datos No Eliminados")
             # flash('datos No Eliminados')
         return redirect(url_for("listaInvitado"))
+
 
 # ACTUALIZAR
 @app.route("/actualizar_invitado/<int:id_inv>", methods=["POST"])
@@ -277,7 +298,69 @@ def actualizar_invitado(id_inv):
             # flash('datos No Actualizados')
         return redirect(url_for("listaInvitado"))
 
+
 # endregion
+
+# ADMINISTRATORS' MAINTAINER
+# INSERTAR
+@app.route("/insertar_admin", methods=["POST"])
+def insertar_admin():
+    if request.method == "POST":
+        try:
+            auxBotonInsertar = request.form["btoInsertar"]
+            if auxBotonInsertar == "Insertar":
+                auxIdAdmin = ""
+                auxUsuario = request.form["txtUsuario"]
+                auxNombre = request.form["txtNombre"]
+                auxPassword = request.form["txtPassword"]
+
+                # auxUrlImg = request.files["txtUrl"]
+                # newAuxUrlImg = (str(uuid.uuid1()) + os.path.splitext(auxUrlImg.filename)[1])
+                # auxUrlImg.save(os.path.join("static/images", newAuxUrlImg))
+
+                auxAdmin = claseAdmin.Admin(
+                    auxIdAdmin, auxUsuario, auxNombre, auxPassword
+                )
+                mantenedorAdmin.insertar(auxAdmin)
+                print("datos guardados")
+                # flash('datos guardados')
+        except:
+            print("datos No guardados")
+        return redirect(url_for("listaAdmin"))
+
+# ACTUALIZAR
+@app.route("/actualizar_admin/<int:idAdmin>", methods=["POST"])
+def actualizar_admin(idAdmin):
+    if request.method == "POST":
+        try:
+            auxBotonActualizar = request.form["btoActualizar"]
+
+            if auxBotonActualizar == "Actualizar":
+                auxIdAdm = idAdmin
+                auxUserAdm = request.form["txtUsuario"]
+                auxNombreAdm = request.form["txtNombre"]
+                auxPassAdm = request.form["txtPassword"]
+
+                # auxUrlImg = request.files["txtUrl"]
+                # newAuxUrlImg = (
+                #     str(uuid.uuid1()) + os.path.splitext(auxUrlImg.filename)[1]
+                # )
+                # auxUrlImg.save(os.path.join("static/images", newAuxUrlImg))
+
+                auxAdmin = claseAdmin.Admin(
+                    auxIdAdm,
+                    auxUserAdm,
+                    auxNombreAdm,
+                    auxPassAdm
+                )
+                mantenedorAdmin.actualizar(auxAdmin)
+                print("datos Actualizados")
+                # flash('datos Actualizados')
+        except:
+            print("datos No Actualizados")
+            # flash('datos No Actualizados')
+        return redirect(url_for("listaAdmin"))
+
 
 if __name__ == "__main__":
     app.run(port=3000, debug=True)

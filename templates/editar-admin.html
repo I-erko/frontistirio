@@ -19,6 +19,15 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
+  {% with messages = get_flashed_messages() %}
+    {% if messages  %}
+      <ul class=flashes>
+        {% for message in messages  %}
+          <li>{{message}}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith  %}
   <!-- Site wrapper -->
   <div class="wrapper">
     <!-- Navbar -->
@@ -54,8 +63,8 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="#" class="brand-link">
-        <img src="{{ url_for('static',filename='img/AdminLTELogo.png') }}" alt="Frontistirio Logo" class="brand-image img-circle elevation-3"
-          style="opacity: .8">
+        <img src="{{ url_for('static',filename='img/AdminLTELogo.png') }}" alt="Frontistirio Logo"
+          class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light"><b>F</b>rontistirio</span>
       </a>
 
@@ -273,27 +282,29 @@
           </div>
           <div class="card-body">
             <div class="col-md-8">
-              <form role="form" name="-admin" id="-admin" method="POST" action="">
+              <form role="form" name="-admin" id="-admin" method="POST" action="{{ url_for('actualizar_admin', idAdmin=id_admin) }}">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="usuario">Usuario:</label>
-                    <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario">
+                    <label for="txtUsuario">Usuario:</label>
+                    <input type="text" class="form-control" id="txtUsuario" value="{{user_admin}}" name="txtUsuario"
+                      placeholder="Usuario">
                   </div>
                   <div class="form-group">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Tu nombre completo">
+                    <label for="txtNombre">Nombre:</label>
+                    <input type="text" class="form-control" id="txtNombre" value="{{name_admin}}" name="txtNombre"
+                      placeholder="Tu nombre completo">
                   </div>
                   <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" class="form-control" id="password" name="password"
+                    <label for="txtPassword">Password:</label>
+                    <input type="password" class="form-control" id="txtPassword" value="{{pass_admin}}" name="txtPassword"
                       placeholder="Password para iniciar sesión">
                   </div>
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <input type="hidden" name="agregar-admin" value="1">
-                  <button type="submit" class="btn btn-primary">Agregar</button>
+                  <input type="submit" name="btoActualizar" id="btoActualizar" value="Actualizar">
+                  <!-- <button type="submit" class="btn btn-primary">Agregar</button> -->
                 </div>
               </form>
             </div>
