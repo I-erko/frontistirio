@@ -3,7 +3,7 @@ from claseInvitado import Invitado
 
 def conectar():
     try:
-        conexion = pymysql.connect(host='localhost',user='root',password='',db='frontistiriodb')
+        conexion = pymysql.connect(host='localhost',user='root',password='',db='alter_frontistirio')
     except:
         print("Error en la conexión")
     return conexion

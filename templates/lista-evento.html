@@ -22,6 +22,15 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
+  {% with messages = get_flashed_messages() %}
+    {% if messages  %}
+      <ul class=flashes>
+        {% for message in messages  %}
+          <li>{{message}}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith  %}
   <div class="wrapper">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -278,50 +287,37 @@
                         <th>Nombre</th>
                         <th>Fecha</th>
                         <th>Hora</th>
-                        <th>Categoría</th>
-                        <th>Invitado</th>
+                        <!-- <th>Categoría</th>
+                        <th>Invitado</th> -->
                         <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
+                    {% for ev in eventos %}
                       <tr>
-                        <td>HTML, CSS3 y JavaScript</td>
-                        <td>10 de Dic.</td>
-                        <td>16:00 hrs</td>
-                        <td>Taller</td>
-                        <td>Yerko Riffo</td>
+                        <td>{{ev.1}}</td>
+                        <td>{{ev.2}}</td>
+                        <td>{{ev.3}}</td>
+                        <!-- <td>Taller</td>
+                        <td>Yerko Riffo</td> -->
                         <td>
-                          <a href="{{ url_for('editarEvento') }}" class="btn btn-lg bg-orange margin">
+                          <a href="{{ url_for('editarEvento', idEvento=ev.0, nombreEv=ev.1, fechaEv=ev.2, horaEv=ev.3) }}" class="btn btn-lg bg-orange margin">
                             <i class="far fa-edit"></i>
                           </a>
-                          <a href="#" class="btn btn-lg bg-maroon margin">
+                          <a href="{{ url_for('eliminar_evento', idEvento=ev.0) }}" class="btn btn-lg bg-maroon margin">
                             <i class="far fa-trash-alt"></i>
                           </a>
                         </td>
                       </tr>
-                      <tr>
-                        <td>Tecnologías del futuro</td>
-                        <td>10 de Dic.</td>
-                        <td>17:00 hrs</td>
-                        <td>Conferencia</td>
-                        <td>Bryan Pino</td>
-                        <td>
-                          <a href="{{ url_for('editarEvento') }}" class="btn btn-lg bg-orange margin">
-                            <i class="far fa-edit"></i>
-                          </a>
-                          <a href="#" class="btn btn-lg bg-maroon margin">
-                            <i class="far fa-trash-alt"></i>
-                          </a>
-                        </td>
-                      </tr>
+                    {% endfor %}  
                     </tbody>
                     <tfoot>
                       <tr>
                         <th>Nombre</th>
                         <th>Fecha</th>
                         <th>Hora</th>
-                        <th>Categoría</th>
-                        <th>Invitado</th>
+                        <!-- <th>Categoría</th>
+                        <th>Invitado</th> -->
                         <th>Acciones</th>
                       </tr>
                     </tfoot>

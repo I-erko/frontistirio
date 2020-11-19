@@ -1,7 +1,9 @@
 import mantenedorCategoria
+import mantenedorEvento
 import mantenedorInvitado
 import mantenedorAdmin
 import claseCategoria
+import claseEvento
 import claseInvitado
 import claseAdmin
 from flask import Flask, render_template, request, flash, redirect, url_for
@@ -48,13 +50,15 @@ def calendario():
 def login():
     return render_template("login.html")
 
+
 # EVENTO
 # region
 
 
 @app.route("/listaEvento")
 def listaEvento():
-    return render_template("lista-evento.html")
+    datos = mantenedorEvento.consultar()
+    return render_template("lista-evento.html", eventos=datos)
 
 
 @app.route("/crearEvento")
@@ -62,9 +66,9 @@ def crearEvento():
     return render_template("crear-evento.html")
 
 
-@app.route("/editarEvento")
-def editarEvento():
-    return render_template("editar-evento.html")
+@app.route("/editarEvento/<int:idEvento>/<string:nombreEv>/<string:fechaEv>/<string:horaEv>")
+def editarEvento(idEvento,nombreEv,fechaEv,horaEv):
+    return render_template("editar-evento.html", idEv=idEvento, nameEvento=nombreEv, fecEvento=fechaEv, horaEvento=horaEv)
 
 
 # endregion
@@ -148,7 +152,7 @@ def editarAdmin(idAdmin, userAdmin, nameAdmin, passAdmin):
         id_admin=idAdmin,
         user_admin=userAdmin,
         name_admin=nameAdmin,
-        pass_admin=passAdmin,
+        pass_admin=passAdmin
     )
 
 
@@ -314,7 +318,7 @@ def insertar_admin():
                 auxIdAdmin = ""
                 auxUsuario = request.form["txtUsuario"]
                 auxNombre = request.form["txtNombre"]
-                auxPassword = generate_password_hash(request.form["txtPassword"], method="sha256")
+                auxPassword = request.form["txtPassword"]
 
                 # auxUrlImg = request.files["txtUrl"]
                 # newAuxUrlImg = (str(uuid.uuid1()) + os.path.splitext(auxUrlImg.filename)[1])
@@ -378,6 +382,63 @@ def eliminar_admin(idAdmin):
 
 # endregion
 
+# --------EVENT MAINTAINER
+# INSERTAR
+@app.route("/insertar_evento", methods=["POST"])
+def insertar_evento():
+    if request.method == "POST":
+        try:
+            auxBotonInsertar = request.form["btoInsertar"]
+            if auxBotonInsertar == "Insertar":
+                auxIdEvento = ""
+                auxTitulo = request.form["txtTitulo"]
+                auxFecha = request.form["txtFecha"]
+                auxHora = request.form["txtHora"]
+                auxEvento = claseEvento.Evento(auxIdEvento,auxTitulo,auxFecha,auxHora)
+                mantenedorEvento.insertar(auxEvento)
+                print("datos guardados")
+                # flash('datos guardados')
+        except:
+            print("datos No guardados")
+        return redirect(url_for("listaEvento"))
+
+
+# ACTUALIZAR
+@app.route("/actualizar_evento/<int:idEvento>", methods=["POST"])
+def actualizar_evento(idEvento):
+    if request.method == "POST":
+        try:
+            auxBotonActualizar = request.form["btoActualizar"]
+
+            if auxBotonActualizar == "Actualizar":
+                auxIdEvento = idEvento
+                auxTitulo = request.form["txtTitulo"]
+                auxFecha = request.form["txtFecha"]
+                auxHora = request.form["txtHora"]
+                auxEvento = claseEvento.Evento(
+                    auxIdEvento, auxTitulo, auxFecha, auxHora
+                )
+                mantenedorEvento.actualizar(auxEvento)
+                print("datos Actualizados")
+                # flash('datos Actualizados')
+        except:
+            print("datos No Actualizados")
+            # flash('datos No Actualizados')
+        return redirect(url_for("listaEvento"))
+
+
+# ELIMINAR
+@app.route("/eliminar_evento/<int:idEvento>")
+def eliminar_evento(idEvento):
+    if request.method == "GET":
+        try:
+            mantenedorEvento.eliminar(idEvento)
+            print("datos Eliminados")
+            # flash('datos Eliminados')
+        except:
+            print("datos No Eliminados")
+            # flash('datos No Eliminados')
+        return redirect(url_for("listaEvento"))
 
 if __name__ == "__main__":
     app.run(port=3000, debug=True)

@@ -29,7 +29,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="../../index3.html" class="nav-link">Home</a>
+          <a href="#" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Contact</a>
@@ -273,48 +273,49 @@
           </div>
           <div class="card-body">
             <div class="col-md-8">
-              <form role="form" name="-admin" id="-admin" method="POST" action="">
+              <form role="form" name="-admin" id="-admin" method="POST" action="/insertar_evento">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="titulo_evento">Título Evento:</label>
-                    <input type="text" class="form-control" id="titulo_evento" name="titulo_evento"
+                    <label for="txtTitulo">Título Evento:</label>
+                    <input type="text" class="form-control" id="txtTitulo" name="txtTitulo"
                       placeholder="Título del evento">
                   </div>
-                  <div class="form-group">
-                    <label for="categoria_evento">Categoría Evento:</label>
+                  <!-- <div class="form-group">
+                    <label for="txtCat">Categoría Evento:</label>
+                    <input type="text" class="form-control" name="txtCat" id="txtCat" placeholder="Ingresa una categoría">
                     <select name="categoria_evento" class="form-control select2" id="">
                       <option value="">-- Selecciona una categoría --</option>
                       <option value="">Taller</option>
                       <option value="">Conferencia</option>
                       <option value="">Seminario</option>
-
                     </select>
-                  </div>
+                  </div> -->
                   <div class="form-group">
-                    <label>Fecha Evento:</label>
-                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                    <label for="txtFecha">Fecha Evento:</label>
+                    <input type="text" class="form-control" name="txtFecha" id="txtFecha" placeholder="YYYY-MM-DD">
+                    <!-- <div class="input-group date" id="reservationdate" data-target-input="nearest">
                       <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
                       <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="form-group">
-                    <label for="hora_evento">Hora Evento:</label>
-                    <input type="text" class="form-control" id="hora_evento" name="hora_evento"
-                      placeholder="Hora del Evento">
+                    <label for="txtHora">Hora Evento:</label>
+                    <input type="text" class="form-control" id="txtHora" name="txtHora"
+                      placeholder="HH:MM">
                   </div>
-                  <div class="form-group">
-                    <label for="expositor_evento">Expositor del evento:</label>
-                    <input type="text" class="form-control" id="expositor_evento" name="expositor_evento"
+                  <!-- <div class="form-group">
+                    <label for="txtInvitado">Expositor del evento:</label>
+                    <input type="text" class="form-control" id="txtInvitado" name="txtInvitado"
                       placeholder="Nombre del expositor del Evento">
-                  </div>
+                  </div> -->
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <input type="hidden" name="agregar-admin" value="1">
-                  <button type="submit" class="btn btn-primary">Agregar</button>
+                  <input type="submit" name="btoInsertar" value="Insertar">
+                  <!-- <button type="submit" class="btn btn-primary">Agregar</button> -->
                 </div>
               </form>
             </div>
@@ -332,7 +333,7 @@
       <div class="float-right d-none d-sm-block">
         <b>Version</b> 1.0
       </div>
-      <strong>Copyright &copy; 2020 <a href="../../index.html">Frontistirio.cl</a>.</strong>
+      <strong>Copyright &copy; 2020 <a href="#">Frontistirio.cl</a>.</strong>
       Todos los Derechos Reservados.
     </footer>
 
