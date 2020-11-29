@@ -25,7 +25,8 @@ def index():
 
 @app.route("/registro")
 def registro():
-    return render_template("registro.html")
+    datos = mantenedorEvento.consultar()
+    return render_template("registro.html", eventos = datos)
 
 
 @app.route("/invitados")
