@@ -1,2 +1,2 @@
 # frontistirio
-Segunda entrega DWY (Mantenedores) / Bryan Pino - Yerko Riffo
+Tercera entrega DWY (Mantenedores) / Bryan Pino - Yerko Riffo
