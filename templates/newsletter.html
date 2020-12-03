@@ -1,0 +1,319 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Oswald:wght@200;300;400;500;600;700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lightbox.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+    <!-- Add your site or application content here -->
+    <header class="site-header">
+
+        <div class="hero">
+
+            <div class="contenido-header">
+
+                <nav class="redes-sociales">
+
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+
+                </nav>
+                <!--redes-sociales-->
+
+                <div class="informacion-evento">
+
+                    <div class="clearfix">
+
+                        <p class="fecha"><i class="fas fa-calendar-alt" aria-hidden="true"></i>10-11-2020</p>
+                        <p class="ciudad"><i class="fas fa-map-marker-alt" aria-hidden="true"></i>Santiago, CL</p>
+
+                    </div>
+
+                    <a href="{{ url_for('index') }}">
+                        <h1 class="nombre-sitio">FRONTISTIRIO</h1>
+                    </a>
+                    <p class="slogan">Las mejores conferencias, talleres y seminarios de <br> <span>Desarrollo de
+                            Software y Tecnologías</span></p>
+
+                </div>
+                <!--informacion-evento-->
+
+
+            </div> <!-- contenido-header-->
+
+        </div>
+
+    </header>
+
+    <div class="barra">
+
+        <div class="contenedor clearfix">
+
+            <div class="logo">
+
+                <a href="{{ url_for('index') }}">
+
+                </a>
+
+            </div>
+
+            <div class="menu-movil">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+            <nav class="navegacion-principal clearfix">
+
+                <a href="{{ url_for('conferencia') }}">Conferencia</a>
+                <a href="{{ url_for('calendario') }}">Calendario</a>
+                <a href="{{ url_for('invitados') }}">Invitados</a>
+                <a href="{{ url_for('registro') }}">Reservaciones</a>
+
+            </nav>
+
+        </div>
+
+    </div> <!-- barra -->
+
+    <div class="container-fluid">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Main content -->
+                <section class="content" style="margin-top: 4vw">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-12">
+                                <!-- general form elements -->
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Contáctenos</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <form role="form" method="POST" action="/registroNews">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="TxtNombre">Nombre</label>
+                                                <input type="text" class="form-control" name="TxtNombre" id="TxtNombre"
+                                                    placeholder="Ingresa tu nombre">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="TxtApellido">Apellido</label>
+                                                <input type="text" class="form-control" name="TxtApellido" id="TxtApellido"
+                                                    placeholder="Ingresa tu apellido">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="TxtTelefono">N° Telefónico</label>
+                                                <input type="tel" class="form-control" name="TxtTelefono" id="TxtTelefono"
+                                                    placeholder="56 9 93947622">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="TxtEmail">Email</label>
+                                                <input type="email" class="form-control" name="TxtEmail" id="TxtEmail"
+                                                    placeholder="Ingresa tu Email">
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            <button type="submit" name="btnNews" value="Suscribir" class="btn btn-primary">Unirme</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!--/.col (left) -->
+                        </div>
+                        <!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </section>
+                <!-- /.content -->
+            </div>
+            <!-- /.content-wrapper -->
+            <div class="col-md-6">
+                <!-- Main content -->
+                <section class="content" style="margin-top: 4vw">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-12">
+                                <!-- general form elements -->
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">¿Quieres dejar de recibir nuestras noticias?</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <form role="form" action="/registroNews" method="POST">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="TxtEmailC">Email</label>
+                                                <input type="email" class="form-control" name="TxtEmailC" id="TxtEmailC"
+                                                    placeholder="Ingresa tu Email">
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            <button type="submit" name="btnNews" value="Cancelar" class="btn btn-primary">Si, quiero!</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <div class="col-md-12">
+                                <!-- general form elements -->
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">¿Quieres volver a recibir nuestras noticias?</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <form role="form" action="/registroNews" method="POST">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="TxtEmailV">Email</label>
+                                                <input type="email" class="form-control" name="TxtEmailV" id="TxtEmailV"
+                                                    placeholder="Ingresa tu Email">
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            <button type="submit" name="btnNews" value="Resuscribir" class="btn btn-primary">Volver a unirme</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!--/.col (left) -->
+                        </div>
+                        <!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <!-- bs-custom-file-input -->
+    <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{{ url_for('static', filename='js/demo.js') }}"></script>
+
+    <footer class="site-footer">
+
+        <div class="contenedor clearfix">
+
+            <div class="footer-informacion">
+
+                <h3>Sobre <span>Frontistirio</span></h3>
+
+                <p>Somos una organización dedicada a la difusión y exposición de eventos relacionados a la tecnología y
+                    el desarrollo de software. Nuestra misión principal es acercar a la gente que comparte la pasión por
+                    la tecnología y ser un centro creador de conocimiento.</p>
+
+            </div> <!-- footer-informacion -->
+
+            <div class="ultimos-tweets">
+
+                <h3>Últimos <span>Tweets</span></h3>
+
+                <ul>
+
+                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, rerum quos! Sint ad aut quo
+                        illum nemo voluptates tenetur dignissimos, optio illo temporibus tempore, eaque, saepe vitae
+                        ipsam obcaecati! Quisquam?</li>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, rerum quos! Sint ad aut quo
+                        illum nemo voluptates tenetur dignissimos, optio illo temporibus tempore, eaque, saepe vitae
+                        ipsam obcaecati! Quisquam?</li>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, rerum quos! Sint ad aut quo
+                        illum nemo voluptates tenetur dignissimos, optio illo temporibus tempore, eaque, saepe vitae
+                        ipsam obcaecati! Quisquam?</li>
+
+                </ul>
+
+            </div> <!-- ultimos-tweets -->
+
+            <div class="menu">
+
+                <h3>Redes <span>Sociales</span></h3>
+
+                <nav class="redes-sociales">
+
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+
+                </nav>
+
+            </div> <!-- menu -->
+
+        </div> <!-- contenedor clearfix -->
+
+        <p class="copyright">2020 Frontistirio. Todos los derechos reservados</p>
+
+
+
+    </footer> <!-- site-footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/modernizr-3.11.2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.animateNumber.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.countdown.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.lettering.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+
+    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+    <script>
+
+        window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+        ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
+
+    </script>
+
+    <script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>

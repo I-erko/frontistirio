@@ -12,8 +12,8 @@ def insertar(evento):
     conexion = conectar()
     try:
         with conexion.cursor() as cursor:
-            consulta = "INSERT INTO evento (evento_id,nombre_evento,fecha_evento,hora_evento) VALUES (%s,%s,%s,%s);"
-            cursor.execute(consulta,(evento.evento_id,evento.nombre_evento,evento.fecha_evento,evento.hora_evento))
+            consulta = "INSERT INTO evento (evento_id,nombre_evento,codigo,hora_evento,id_categoria,id_invitado) VALUES (%s,%s,%s,%s,%s,%s);"
+            cursor.execute(consulta,(evento.evento_id,evento.nombre_evento,evento.codigo,evento.hora_evento,evento.id_categoria,evento.id_invitado))
         conexion.commit()
     except (pymysql.err.OperationalError,pymysql.err.InternalError) as e:
         print("Error de SQL:",e)
@@ -23,10 +23,9 @@ def consultar():
     conexion = conectar()
     try:
         with conexion.cursor() as cursor:
-            cursor.execute("SELECT * FROM evento;") 
+            cursor.execute("SELECT * FROM evento ORDER BY hora_evento;") 
             auxEvento = cursor.fetchall()
-            for ev in auxEvento:
-                print(ev)
+            
         return auxEvento
     except (pymysql.err.OperationalError,pymysql.err.InternalError) as ex:
         print("ocurrió un error al insertar ", ex)
@@ -46,12 +45,12 @@ def consultar():
 # #         print("ocurrió un error al insertar ", ex)
 # #     conexion.close()
 
-def actualizar(evento):
+def actualizar(evento):              
     conexion = conectar()
     try:
         with conexion.cursor() as cursor:
-            consulta = "UPDATE evento SET nombre_evento = %s, fecha_evento = %s, hora_evento = %s WHERE evento_id = %s;"
-            cursor.execute(consulta,(evento.nombre_evento,evento.fecha_evento,evento.hora_evento,evento.evento_id))
+            consulta = "UPDATE evento SET nombre_evento = %s, codigo = %s, hora_evento = %s, id_categoria = %s, id_invitado = %s WHERE evento_id = %s;"
+            cursor.execute(consulta,(evento.nombre_evento,evento.codigo ,evento.hora_evento,evento.id_categoria, evento.id_invitado,evento.evento_id))
         conexion.commit()
     except (pymysql.err.OperationalError,pymysql.err.InternalError) as ex:
         print("ocurrió un error al actualizar ", ex)

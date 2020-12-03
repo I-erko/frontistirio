@@ -2,21 +2,24 @@ import mantenedorCategoria
 import mantenedorEvento
 import mantenedorInvitado
 import mantenedorAdmin
+import transaccionRegistro
+import transaccionNewsLetter
 import claseCategoria
 import claseEvento
 import claseInvitado
 import claseAdmin
+import claseRegistro
+import claseNewsLetter
 from flask import Flask, render_template, request, flash, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
 import os
-
-app = Flask(__name__)
 # Set the secret key to some random bytes. Keep this really secret!
 # app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
+app = Flask(__name__)
+app.secret_key="hola"
 # ////////////////// MAIN ROUTES //////////////////
-
 
 @app.route("/")
 def index():
@@ -51,7 +54,9 @@ def calendario():
 def login():
     return render_template("login.html")
 
-
+@app.route("/newsletter")
+def newsletter():
+    return render_template("newsletter.html")
 # EVENTO
 # region
 
@@ -393,9 +398,13 @@ def insertar_evento():
             if auxBotonInsertar == "Insertar":
                 auxIdEvento = ""
                 auxTitulo = request.form["txtTitulo"]
-                auxFecha = request.form["txtFecha"]
+                auxCodigo = request.form["txtFecha"]
                 auxHora = request.form["txtHora"]
-                auxEvento = claseEvento.Evento(auxIdEvento,auxTitulo,auxFecha,auxHora)
+                auxIdCategoria = request.form["txtCategoria"]
+                auxIdInvitado = request.form["txtIdInvitado"]
+                auxEvento = claseEvento.Evento(   
+                    auxIdEvento, auxTitulo, auxCodigo, auxHora , auxIdCategoria,auxIdInvitado
+                )
                 mantenedorEvento.insertar(auxEvento)
                 print("datos guardados")
                 # flash('datos guardados')
@@ -414,10 +423,12 @@ def actualizar_evento(idEvento):
             if auxBotonActualizar == "Actualizar":
                 auxIdEvento = idEvento
                 auxTitulo = request.form["txtTitulo"]
-                auxFecha = request.form["txtFecha"]
+                auxCodigo = request.form["txtFecha"]
                 auxHora = request.form["txtHora"]
-                auxEvento = claseEvento.Evento(
-                    auxIdEvento, auxTitulo, auxFecha, auxHora
+                auxIdCategoria = request.form["txtCategoria"]
+                auxIdInvitado = request.form["txtIdInvitado"]
+                auxEvento = claseEvento.Evento(   
+                    auxIdEvento, auxTitulo, auxCodigo, auxHora , auxIdCategoria,auxIdInvitado
                 )
                 mantenedorEvento.actualizar(auxEvento)
                 print("datos Actualizados")
@@ -441,5 +452,64 @@ def eliminar_evento(idEvento):
             # flash('datos No Eliminados')
         return redirect(url_for("listaEvento"))
 
+#REGISTRO A EVENTOS 
+@app.route('/registro', methods=['POST'])
+def registrarse():
+    if request.method == "POST":
+        try:
+            pagar = request.form['btnRegistro']
+            if pagar == "Pagar":
+                ticketV = int(request.form.get("pase_viernes"))
+                ticketVS = int(request.form.get("pase_dosdias"))
+                ticketC = int(request.form.get("pase_completo"))
+                nom = request.form["nombre"]
+                ape = request.form["apellido"]
+                email = request.form["email"]
+                camisas = request.form.get('camisas')
+                etiquetas = request.form.get('etiquetas')
+                regalo = request.form['regalo']
+               
+
+                if ticketV > 0  or ticketVS > 0 or ticketC > 0:
+
+                    
+                    asistente = claseRegistro.Registro(email,nom,ape,ticketV,ticketVS,ticketC,camisas,etiquetas,regalo)
+                    transaccionRegistro.insertar(asistente)
+                else:
+                    flash("Debes seleccionar al menos un ticket")
+
+                   
+
+                    
+        except:
+            
+            print("No ingresado")
+    return redirect(url_for("registro"))
+
+@app.route('/registroNews', methods=['POST'])
+def regNews():
+    if request.method == "POST":
+        try:
+            news = request.form['btnNews']
+            if news == "Suscribir":
+                email = request.form['TxtEmail']
+                nom = request.form['TxtNombre']
+                ape = request.form['TxtApellido']
+                fono = int(request.form['TxtTelefono'])
+                auxNewsLetter = claseNewsLetter.NewsLetter(email,nom,ape,fono)
+                transaccionNewsLetter.insertar(auxNewsLetter)
+            elif news == "Cancelar":
+                email = request.form['TxtEmailC']
+                transaccionNewsLetter.updateFalse(email)
+            elif news == "Resuscribir":
+                email = request.form['TxtEmailV']
+                transaccionNewsLetter.updateTrue(email)
+        except:
+            print("Error")
+    return redirect(url_for("newsletter"))
+
+
 if __name__ == "__main__":
     app.run(port=3000, debug=True)
+
+

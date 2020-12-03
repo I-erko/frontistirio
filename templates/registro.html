@@ -8,6 +8,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -54,8 +55,11 @@
 
                     </div>
 
-                    <a href="{{ url_for('index') }}"><h1 class="nombre-sitio">FRONTISTIRIO</h1></a>
-                    <p class="slogan">Las mejores conferencias, talleres y seminarios de <br> <span>Desarrollo de Software y Tecnologías</span></p>
+                    <a href="{{ url_for('index') }}">
+                        <h1 class="nombre-sitio">FRONTISTIRIO</h1>
+                    </a>
+                    <p class="slogan">Las mejores conferencias, talleres y seminarios de <br> <span>Desarrollo de
+                            Software y Tecnologías</span></p>
 
                 </div>
                 <!--informacion-evento-->
@@ -100,11 +104,22 @@
 
     </div> <!-- barra -->
 
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">×</span></button>
+        {{message}}
+    </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <section class="seccion contenedor">
 
         <h2>Registro de Usuarios</h2>
 
-        <form id="registro" action="" method="POST" class="registro">
+        <form id="registro" action="/registro" method="POST" class="registro">
 
             <div id="datos_usuario" class="registro caja clearfix">
                 <div class="campo">
@@ -156,7 +171,7 @@
                             <div class="orden">
 
                                 <label for="pase_dia">Boletos deseados:</label>
-                                <input type="number" min="0" id="pase_dia" size="3" placeholder="0">
+                                <input type="number" min="0" value="0" id="pase_dia" name="pase_viernes" size="3" placeholder="0">
 
                             </div>
 
@@ -182,7 +197,7 @@
 
                             <div class="orden">
                                 <label for="pase_completo">Boletos deseados:</label>
-                                <input type="number" min="0" id="pase_completo" size="3" placeholder="0">
+                                <input type="number" min="0" value="0" id="pase_completo" size="3" name="pase_completo" placeholder="0">
                             </div>
 
                         </div> <!-- tabla-precio -->
@@ -207,7 +222,7 @@
 
                             <div class="orden">
                                 <label for="pase_dosdias">Boletos deseados:</label>
-                                <input type="number" min="0" id="pase_dosdias" size="3" placeholder="0">
+                                <input type="number" min="0" value="0" id="pase_dosdias" name="pase_dosdias" size="3" placeholder="0">
                             </div>
 
                         </div> <!-- tabla-precio -->
@@ -227,19 +242,29 @@
                         <div>
                             <p>Talleres:</p>
                             {% for datos in eventos %}
+                            {% if datos.2 == 1 and datos.4 == 1 %}
                             <label type="text" name="TxtRegEventos_{{datos.0}}" id="taller"
-                                value="{{datos.0}}"><time>{{datos.3}}</time>{{datos.1}}</label>
+                                value="{{datos.0}}"><time>{{datos.3}}</time> {{datos.1}}</label>
+                            {% endif %}
                             {% endfor %}
                         </div>
                         <div>
                             <p>Conferencias:</p>
-                            <label type="text" name="registro[]" id="conf_01"
-                                    value="conf_01"><time>10:00</time> Como ser Freelancer</label>
+                            {% for datos in eventos %}
+                            {% if datos.2 == 1 and datos.4 == 2 %}
+                            <label type="text" name="TxtRegEventos_{{datos.0}}" id="taller"
+                                value="{{datos.0}}"><time>{{datos.3}}</time> {{datos.1}}</label>
+                            {% endif %}
+                            {% endfor %}
                         </div>
                         <div>
                             <p>Seminarios:</p>
-                            <label type="text" name="registro[]" id="sem_01"
-                                value="sem_01"><time>10:00</time> Diseño UI y UX para móviles</label>
+                            {% for datos in eventos %}
+                            {% if datos.2 == 1 and datos.4 == 3 %}
+                            <label type="text" name="TxtRegEventos_{{datos.0}}" id="taller"
+                                value="{{datos.0}}"><time>{{datos.3}}</time> {{datos.1}}</label>
+                            {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                     <!--#viernes-->
@@ -247,19 +272,30 @@
                         <h4>Sábado</h4>
                         <div>
                             <p>Talleres:</p>
-                            <label type="text" name="registro[]" id="taller_06"
-                                    value="taller_06"><time>10:00</time> AngularJS</label>
+                            {% for datos in eventos %}
+                            {% if datos.2 == 2 and datos.4 == 1 %}
+                            <label type="text" name="TxtRegEventos_{{datos.0}}" id="taller"
+                                value="{{datos.0}}"><time>{{datos.3}}</time> {{datos.1}}</label>
+                            {% endif %}
+                            {% endfor %}
                         </div>
                         <div>
                             <p>Conferencias:</p>
-                            <label type="text" name="registro[]" id="conf_04"
-                                    value="conf_04"><time>10:00</time> Como crear una tienda online que venda millones
-                                en pocos días</label>
+                            {% for datos in eventos %}
+                            {% if datos.2 == 2 and datos.4 == 2 %}
+                            <label type="text" name="TxtRegEventos_{{datos.0}}" id="taller"
+                                value="{{datos.0}}"><time>{{datos.3}}</time> {{datos.1}}</label>
+                            {% endif %}
+                            {% endfor %}
                         </div>
                         <div>
                             <p>Seminarios:</p>
-                            <label type="text" name="registro[]" id="sem_02"
-                                    value="sem_02"><time>10:00</time> Aprende a Programar en una mañana</label>
+                            {% for datos in eventos %}
+                            {% if datos.2 == 2 and datos.4 == 3 %}
+                            <label type="text" name="TxtRegEventos_{{datos.0}}" id="taller"
+                                value="{{datos.0}}"><time>{{datos.3}}</time> {{datos.1}}</label>
+                            {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                     <!--#sabado-->
@@ -267,18 +303,30 @@
                         <h4>Domingo</h4>
                         <div>
                             <p>Talleres:</p>
-                            <label type="text" name="registro[]" id="taller_12"
-                                    value="taller_12"><time>10:00</time> Laravel</label>
+                            {% for datos in eventos %}
+                            {% if datos.2 == 3 and datos.4 == 1 %}
+                            <label type="text" name="TxtRegEventos_{{datos.0}}" id="taller"
+                                value="{{datos.0}}"><time>{{datos.3}}</time> {{datos.1}}</label>
+                            {% endif %}
+                            {% endfor %}
                         </div>
                         <div>
                             <p>Conferencias:</p>
-                            <label type="text" name="registro[]" id="conf_07"
-                                    value="conf_07"><time>10:00</time> Como hacer Marketing en línea</label>
+                            {% for datos in eventos %}
+                            {% if datos.2 == 3 and datos.4 == 2 %}
+                            <label type="text" name="TxtRegEventos_{{datos.0}}" id="taller"
+                                value="{{datos.0}}"><time>{{datos.3}}</time> {{datos.1}}</label>
+                            {% endif %}
+                            {% endfor %}
                         </div>
                         <div>
                             <p>Seminarios:</p>
-                            <label type="text" name="registro[]" id="sem_04"
-                                    value="sem_04"><time>14:00</time> Creando una App en Android en una tarde</label>
+                            {% for datos in eventos %}
+                            {% if datos.2 == 3 and datos.4 == 3 %}
+                            <label type="text" name="TxtRegEventos_{{datos.0}}" id="taller"
+                                value="{{datos.0}}"><time>{{datos.3}}</time> {{datos.1}}</label>
+                            {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                     <!--#domingo-->
@@ -296,7 +344,7 @@
 
                             <label for="camisa_evento">Camisa del evento $10 <small>(promoción 7% de
                                     dto.)</small></label>
-                            <input type="number" min="0" id="camisa_evento" size="3" placeholder="0">
+                            <input type="number" name="camisas" min="0" value="0" id="camisa_evento" size="3" placeholder="0">
 
                         </div> <!-- orden-->
 
@@ -304,7 +352,7 @@
 
                             <label for="etiquetas">Paquete de 10 etiquetas $2 <small>(HTML5, CSS3, JavaScript,
                                     Chrome)</small></label>
-                            <input type="number" min="0" id="etiquetas" size="3" placeholder="0">
+                            <input type="number" name="etiquetas" min="0" value="0" id="etiquetas" size="3" placeholder="0">
 
                         </div> <!-- orden-->
 
@@ -312,7 +360,7 @@
 
                             <label for="regalo">Seleccione un regalo</label>
 
-                            <select id="regalo" required>
+                            <select id="regalo" name="regalo" required>
 
                                 <option value="">--> Seleccione un regalo <-- </option> <br>
                                 <option value="ETI">Etiquetas</option>
@@ -323,7 +371,7 @@
 
                         </div> <!-- orden-->
 
-                        <input type="button" id="calcular" class="button" value="Calcular">
+                        <input type="button" na id="calcular" class="button" value="Calcular">
 
                     </div> <!-- extras -->
 
@@ -341,7 +389,7 @@
 
                         </div>
 
-                        <input type="submit" id="btnRegistro" class="button" value="Pagar">
+                        <input type="submit" id="btnRegistro" name="btnRegistro" class="button" value="Pagar">
 
                     </div> <!-- total -->
 
@@ -362,7 +410,9 @@
 
                 <h3>Sobre <span>Frontistirio</span></h3>
 
-                <p>Somos una organización dedicada a la difusión y exposición de eventos relacionados a la tecnología y el desarrollo de software. Nuestra misión principal es acercar a la gente que comparte la pasión por la tecnología y ser un centro creador de conocimiento. </p>
+                <p>Somos una organización dedicada a la difusión y exposición de eventos relacionados a la tecnología y
+                    el desarrollo de software. Nuestra misión principal es acercar a la gente que comparte la pasión por
+                    la tecnología y ser un centro creador de conocimiento. </p>
 
             </div> <!-- footer-informacion -->
 
@@ -409,15 +459,14 @@
     </footer> <!-- site-footer -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js%22%3E"></script>
     <script src="{{ url_for('static', filename='js/vendor/modernizr-3.11.2.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/plugins.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.animateNumber.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.countdown.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.lettering.js') }}"></script>
     <script src="{{ url_for('static', filename='js/lightbox.js') }}"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
     <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->

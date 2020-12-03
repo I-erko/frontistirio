@@ -22,7 +22,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
-  {% with messages = get_flashed_messages() %}
+  {% with messages = get_flashed_messages() %}   
     {% if messages  %}
       <ul class=flashes>
         {% for message in messages  %}
@@ -285,7 +285,7 @@
                     <thead>
                       <tr>
                         <th>Nombre</th>
-                        <th>Fecha</th>
+                        <th>Codigo</th>
                         <th>Hora</th>
                         <!-- <th>Categoría</th>
                         <th>Invitado</th> -->
@@ -314,7 +314,7 @@
                     <tfoot>
                       <tr>
                         <th>Nombre</th>
-                        <th>Fecha</th>
+                        <th>Codigo</th>
                         <th>Hora</th>
                         <!-- <th>Categoría</th>
                         <th>Invitado</th> -->
